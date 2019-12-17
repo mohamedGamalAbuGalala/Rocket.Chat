@@ -1,21 +1,41 @@
-FROM rocketchat/base:8
+FROM node:10.13
+
+RUN apt-get update
+
+RUN apt install -y g++ build-essential git curl python-minimal ca-certificates imagemagick --no-install-recommends
+# && groupadd -g 65533 -r rocketchat \
+# && useradd -u 65533 -r -g rocketchat rocketchat
+
+# RUN curl https://install.meteor.com/ | sh
 
 
-RUN sudo apt install g++ build-essential git curl python-minimal
 
-RUN curl https://install.meteor.com/ | sh
+# RUN curl https://install.meteor.com/ | sed 's/1.8.2/1.6.1/' | sh
 
-ADD . /app
 
-RUN chown -R rocketchat:rocketchat /app
+RUN useradd -ms /bin/bash rocketchat
+
+ADD . /home/rocketchat/app
+
+WORKDIR /home/rocketchat/app
+
+
+# USER rocketchat
+
+# RUN mkdir /home
+RUN mkdir /home/rocketchat/.meteor-install-tmp
+
+RUN chown -Rh rocketchat:rocketchat /home/rocketchat/app
 
 USER rocketchat
 
-WORKDIR /app
-
 RUN meteor npm install
 
+RUN chown -Rh rocketchat:rocketchat /home/rocketchat/app
+
+
 # needs a mongoinstance - defaults to container linking with alias 'mongo'
+
 ENV NODE_ENV=development \
     MONGO_URL=mongodb://mongo:27017/rocketchat \
     PORT=3000 \
@@ -27,5 +47,3 @@ ENV NODE_ENV=development \
 EXPOSE 3000
 
 CMD meteor npm start
-
-
