@@ -5,8 +5,8 @@ services:
     build:
       context: ./
       dockerfile: .docker/Dockerfile.dev
-    volumes:
-      - ./:/app
+    # volumes:
+      # - ./:/app
     environment:
       - HOME=/home/rocketchat
       - PORT=3000

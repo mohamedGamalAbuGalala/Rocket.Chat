@@ -21,7 +21,7 @@ USER rocketchat
 RUN meteor npm install
 
 RUN chown -Rh rocketchat /app
-RUN chown -Rh rocketchat /app/.meteor
+# RUN chown -Rh rocketchat /app/.meteor
 
 # needs a mongoinstance - defaults to container linking with alias 'mongo'
 ENV NODE_ENV=development \
