@@ -61,6 +61,7 @@
 	],
 	"scripts": {
 		"start": "meteor",
+		"prepare-docker": "sudo chmod -R 777 . && sudo chown -Rh $USER .",
 		"debug": "meteor run --inspect",
 		"debug-brk": "meteor run --inspect-brk",
 		"lint": "meteor npm run stylelint && meteor npm run jslint",
