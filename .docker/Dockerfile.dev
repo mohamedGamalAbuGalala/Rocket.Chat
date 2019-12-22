@@ -2,9 +2,9 @@ FROM node:10.13
 
 RUN apt-get update
 
-RUN apt install -y g++ build-essential git curl python-minimal ca-certificates imagemagick --no-install-recommends 
+RUN apt install -y g++ build-essential git curl python-minimal ca-certificates imagemagick --no-install-recommends
 
-RUN curl https://install.meteor.com/ | sh 
+RUN curl https://install.meteor.com/ | sh
 
 RUN useradd -ms /bin/bash rocketchat
 
@@ -23,8 +23,15 @@ WORKDIR /app
 RUN meteor npm install
 # RUN npm install
 
-RUN chown -Rh rocketchat /app
+USER root
+WORKDIR /app
+
+# RUN chown -Rh rocketchat /app
 # RUN chown -Rh rocketchat /app/.meteor
+
+RUN chmod -R 777 /app && chown -Rh rocketchat /app
+
+USER rocketchat
 
 # needs a mongoinstance - defaults to container linking with alias 'mongo'
 ENV NODE_ENV=development \
