@@ -17,7 +17,7 @@ export const _default = () =>
 	/>;
 
 export const withRawSectionName = () =>
-	<Header rawSectionName='Welcome to Rocket.Chat' />;
+	<Header rawSectionName='Welcome to my Rocket.Chat' />;
 
 export const withSectionName = () =>
 	<Header sectionName='Accounts_Enrollment_Email_Subject_Default' />;
