@@ -56,8 +56,8 @@ services:
     depends_on:
       - mongo
 
-  volumes:
-    meteor-volume:
+volumes:
+  meteor-volume:
   # hubot, the popular chatbot (add the bot user first and change the password before starting this image)
   # hubot:
   #   image: rocketchat/hubot-rocketchat:latest
